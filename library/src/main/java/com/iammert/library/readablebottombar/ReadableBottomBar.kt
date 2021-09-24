@@ -42,19 +42,19 @@ class ReadableBottomBar @JvmOverloads constructor(context: Context, attrs: Attri
 
     private var currentSelectedView: BottomBarItemView? = null
 
-    private var indicatorView: View? = null
+//    private var indicatorView: View? = null
 
     private var itemSelectListener: ItemSelectListener? = null
 
-    private var indicatorAnimator: ValueAnimator? = ValueAnimator.ofFloat(0f, 0f).apply {
-        duration = ANIMATION_DURATION
-        addUpdateListener { animation ->
-            val marginLeft = animation.animatedValue as Float
-            val marginParam: LinearLayout.LayoutParams = indicatorView?.layoutParams as LayoutParams
-            marginParam.setMargins(marginLeft.toInt(), marginParam.topMargin, marginParam.rightMargin, marginParam.bottomMargin)
-            indicatorView?.layoutParams = marginParam
-        }
-    }
+//    private var indicatorAnimator: ValueAnimator? = ValueAnimator.ofFloat(0f, 0f).apply {
+//        duration = ANIMATION_DURATION
+//        addUpdateListener { animation ->
+//            val marginLeft = animation.animatedValue as Float
+//            val marginParam: LinearLayout.LayoutParams = indicatorView?.layoutParams as LayoutParams
+//            marginParam.setMargins(marginLeft.toInt(), marginParam.topMargin, marginParam.rightMargin, marginParam.bottomMargin)
+//            indicatorView?.layoutParams = marginParam
+//        }
+//    }
 
     init {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.ReadableBottomBar, defStyleAttr, defStyleAttr)
@@ -99,7 +99,7 @@ class ReadableBottomBar @JvmOverloads constructor(context: Context, attrs: Attri
         itemHeight = layoutHeight
 
         post {
-            drawIndicator()
+//            drawIndicator()
             drawBottomBarItems()
         }
     }
@@ -175,26 +175,26 @@ class ReadableBottomBar @JvmOverloads constructor(context: Context, attrs: Attri
         addView(itemContainerLayout)
     }
 
-    private fun drawIndicator() {
-        indicatorView = View(context).apply {
-            val indicatorLayoutParams = LinearLayout.LayoutParams(itemWidth.toInt(), tabIndicatorHeight)
-            indicatorLayoutParams.setMargins((tabInitialSelectedIndex * itemWidth).toInt(), 0, 0, 0)
-            layoutParams = indicatorLayoutParams
-            setBackgroundColor(tabIndicatorColor)
-        }
-        addView(indicatorView)
-    }
+//    private fun drawIndicator() {
+//        indicatorView = View(context).apply {
+//            val indicatorLayoutParams = LinearLayout.LayoutParams(itemWidth.toInt(), tabIndicatorHeight)
+//            indicatorLayoutParams.setMargins((tabInitialSelectedIndex * itemWidth).toInt(), 0, 0, 0)
+//            layoutParams = indicatorLayoutParams
+//            setBackgroundColor(tabIndicatorColor)
+//        }
+//        addView(indicatorView)
+//    }
 
-    private fun animateIndicator(currentItemIndex: Int) {
-        val previousMargin: Float = (indicatorView?.layoutParams as? LinearLayout.LayoutParams)?.leftMargin?.toFloat()
-                ?: 0F
-        val currentMargin: Float = currentItemIndex * itemWidth
-        indicatorAnimator?.setFloatValues(previousMargin, currentMargin)
-        indicatorAnimator?.start()
-    }
+//    private fun animateIndicator(currentItemIndex: Int) {
+//        val previousMargin: Float = (indicatorView?.layoutParams as? LinearLayout.LayoutParams)?.leftMargin?.toFloat()
+//                ?: 0F
+//        val currentMargin: Float = currentItemIndex * itemWidth
+//        indicatorAnimator?.setFloatValues(previousMargin, currentMargin)
+//        indicatorAnimator?.start()
+//    }
 
     private fun onSelected(index: Int, bottomBarItemView: BottomBarItemView) {
-        animateIndicator(index)
+//        animateIndicator(index)
 
         currentSelectedView?.deselect()
         currentSelectedView = bottomBarItemView
